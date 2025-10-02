@@ -42,4 +42,10 @@ public static void main(String[] args) {
 
     //restricciones + holguras
     for (int i = 0 < m; i++){
+        for (int j = 0;j < n; j++){
+            tab[i + 1][i] = A[i][j];
+        }
+        tab[i + 1][n + i] = 1; //holgura
+        tab[i + 1][cols-1] = b[i];
+    }
 }
