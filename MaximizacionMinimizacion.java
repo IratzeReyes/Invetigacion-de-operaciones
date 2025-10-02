@@ -30,8 +30,16 @@ public static void main(String[] args) {
         }
         System.out.println("Valor del lado derecho: ");
         b[i] = sc.nextDouble();
-        System.err.println("zuri");
-        
+       }
+    //Construccion de tableo
+    int filas = m + 1;
+    int cols = n + m +1;
+    double [][]tab = new double [filas][cols];
+    //fila de z
+    for(int j =0; j < n;j++){
+     tab[0][j] = maximizar ? -c[j]:c[j];
+    }
 
-}
+    //restricciones + holguras
+    for (int i = 0 < m; i++){
 }
