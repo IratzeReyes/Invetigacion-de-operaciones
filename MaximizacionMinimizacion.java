@@ -82,4 +82,26 @@ public static void main(String[] args) {
                     }
                 }
             }
+         if (filaPiv == -1) {
+                System.out.println("Problema ilimitado.");
+                return;
+            }
+
+            System.out.println("\nIteración " + iter++);
+            System.out.println("Columna pivote: " + (colPiv + 1));
+            System.out.println("Fila pivote: " + (filaPiv + 1));
+
+            // Pivoteo
+            double pivote = tab[filaPiv][colPiv];
+            for (int j = 0; j < cols; j++) {
+                tab[filaPiv][j] /= pivote;
+            }
+            for (int i = 0; i < filas; i++) {
+                if (i != filaPiv) {
+                    double factor = tab[i][colPiv];
+                    for (int j = 0; j < cols; j++) {
+                        tab[i][j] -= factor * tab[filaPiv][j];
+                    }
+                }
+            }
 }
