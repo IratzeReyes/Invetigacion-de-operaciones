@@ -65,5 +65,21 @@ public static void main(String[] args) {
                 colPiv = j;
             }
         }
-    
+      if (colPiv == -1) {
+                System.out.println("Ya no hay coeficientes negativos en Z. ¡Solución óptima encontrada!");
+                break;
+            }
+
+            // Fila pivote
+            int filaPiv = -1;
+            double minRatio = Double.POSITIVE_INFINITY;
+            for (int i = 1; i < filas; i++) {
+                if (tab[i][colPiv] > 0) {
+                    double ratio = tab[i][cols - 1] / tab[i][colPiv];
+                    if (ratio < minRatio) {
+                        minRatio = ratio;
+                        filaPiv = i;
+                    }
+                }
+            }
 }
