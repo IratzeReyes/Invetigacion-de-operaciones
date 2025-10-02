@@ -48,4 +48,22 @@ public static void main(String[] args) {
         tab[i + 1][n + i] = 1; //holgura
         tab[i + 1][cols-1] = b[i];
     }
+    //Mostrar tableo inicail
+    System.out.println("/nTableau inicial: ");
+     imprimirTableau(tab);
+
+    //Iteraciones
+    int iter = 1;
+    while(true){
+
+        //Columna pivote
+        int colPiv = -1;
+        double min = 0;
+        for (int j = 0; j < cols -1; j++){
+            if (tab[0][j]<min){
+                min = tab[0][j];
+                colPiv = j;
+            }
+        }
+    
 }
