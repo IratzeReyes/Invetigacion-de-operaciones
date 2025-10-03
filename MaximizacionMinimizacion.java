@@ -37,25 +37,23 @@ public static void main(String[] args) {
     double [][]tab = new double [filas][cols];
     //fila de z
     for(int j =0; j < n;j++){
-     tab[0][j] = maximizar ? -c[j]:c[j];
+        tab[0][j] = maximizar ? -c[j]:c[j];
     }
-
-    //restricciones + holguras
-    for (int i = 0 < m; i++){
-        for (int j = 0;j < n; j++){
-            tab[i + 1][i] = A[i][j];
+    //restricciones mas olguras
+    for (int i = 0; i < m; i++){
+        for (int j = 0; j < n; j++){
+            tab[i + 1][j] = A[i][j];
         }
         tab[i + 1][n + i] = 1; //holgura
-        tab[i + 1][cols-1] = b[i];
+        tab[i + 1][cols - 1] = b[i];
     }
-    //Mostrar tableo inicail
-    System.out.println("/nTableau inicial: ");
-     imprimirTableau(tab);
+    //Mostrar tableo inicial
+    System.out.println("\n=========Tableo inicial=========");
+    imprimirTableau(tab);
 
     //Iteraciones
     int iter = 1;
     while(true){
-
         //Columna pivote
         int colPiv = -1;
         double min = 0;
@@ -83,11 +81,10 @@ public static void main(String[] args) {
                 }
             }
          if (filaPiv == -1) {
-                System.out.println("Problema ilimitado.");
-                return;
-            }
-
-            System.out.println("\nIteración " + iter++);
+                System.out.println("\nEl problema es ilimitado. ");
+                break;
+         }
+            System.out.println("\nITERACION " + iter++);
             System.out.println("Columna pivote: " + (colPiv + 1));
             System.out.println("Fila pivote: " + (filaPiv + 1));
 
@@ -104,4 +101,44 @@ public static void main(String[] args) {
                     }
                 }
             }
-}
+            imprimirTableau(tab);
+        }
+        // Solución final
+        double[] sol = new double[n];
+        for (int j= 0; j < n; j++){
+            int fila = -1;
+            boolean esBasica = true;
+            for(int i= 0; i < filas; i++){
+                if(Math.abs(tab[i][j] - 1) < 1e-9){
+                    if(fila == -1)fila =i;
+                    else{ esBasica = false; break;}
+                } else if(Math.abs(tab[i][j]) > 1e-9){
+                    esBasica = false; break;    
+                }
+            }
+            if(esBasica && fila!= -1) sol[j] = tab[fila][cols -1];
+        }
+        double Z = 0;
+        for(int j=0; j < n; j++) Z += c[j]*sol[j];
+            System.out.println("\n=========Solucion Optima=========");
+            for(int j=0; j < n; j++){
+                System.out.println("x" + (j + 1) + " = " + sol[j]);
+            }
+            System.out.println("Valor optimo de Z = " + Z);
+            sc.close(); 
+        }
+        
+                 
+
+              static void imprimirTableau(double[][]tab){
+            for(double[]fila:tab){
+                for(double val:fila){
+                    System.out.printf("%8.2f",val);
+                }
+                System.out.println();
+            }
+        }
+
+
+
+        }
